@@ -1,7 +1,7 @@
 module.exports = {
     entry: {
         app: './src/app.js',
-        sample: './src/sample.js'
+        example: './src/example.js'
     },
     output: {
         path: __dirname + '/dist',
