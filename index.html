@@ -1,50 +1,324 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+    <title>reveal.js</title>
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+                <h1>React & Webpack Starter</h1>
+                <h3>Dalk Study</h3>
+                <p>
+                  <small>Created by <a href="https://github.com/jonnung">EunwooCho</a></small>
+                </p>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                ## React
+                오직 View 만을 담당하는 자바스크립트 라이브러리 <!-- .element: class="fragment" data-fragment-index="1" -->
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                ## React 특징
+                - UI Component
+                  - 캡슐화<!-- .element: class="fragment" data-fragment-index="1" -->
+                  - 재사용성<!-- .element: class="fragment" data-fragment-index="2" -->
+                - Web component 와 관계는?
+                  - (Web component는) 강력한 캡슐화로 재사용성 강조<!-- .element: class="fragment" data-fragment-index="3" -->
+                  - (React는) 변하는 데이터를 통해 DOM의 상태를 관리<!-- .element: class="fragment" data-fragment-index="4" -->
+                  - 두개를 함께 써도 상관없음 (ex. Polymer + React)<!-- .element: class="fragment" data-fragment-index="5" -->
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                ## React 특징
+                - JSX, 자바스크립트 확장 문법
+                  - 가독성 좋음<!-- .element: class="fragment" data-fragment-index="1" -->
+                  - javascript로 complie 필요<!-- .element: class="fragment" data-fragment-index="2" -->
+                  - 사용은 선택 사항<!-- .element: class="fragment" data-fragment-index="3" -->
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+            ## React 특징
+            - Virtual DOM
+              - 비교(diff) 후 바뀐 부분만 실제 DOM으로 업데이트 <!-- .element: class="fragment" data-fragment-index="1" -->
+              - 빠른 성능의 비결<!-- .element: class="fragment" data-fragment-index="2" -->
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+            ## React 특징
+            - 단방향 데이터 흐름 (Unidirectional Data Flow)
+              - 데이터는 오직 부모에서 자식으로 One-way <!-- .element: class="fragment" data-fragment-index="1" -->
+              - 데이터 추적이 쉬워짐 <!-- .element: class="fragment" data-fragment-index="2" -->
+              - Flux, 단방향 데이터 흐름을 나타내는 시스템 아키텍쳐 <!-- .element: class="fragment" data-fragment-index="3" -->
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+            <!-- .slide: data-background="" -->
+            ## Component
+            - 컴포넌트는 React.createClass() 메소드를 사용해서 선언 <!-- .element: class="fragment" data-fragment-index="2" -->
+            - 컴포넌트는 render() 라는 메소드를 갖으며, 랜더링 하기 위한 마크업(JSX)을 return <!-- .element: class="fragment" data-fragment-index="3" -->
+              ```
+               var Greeting = React.createClass({  // <----- 이게 컴포넌트 
+                 render: function() {
+                   return (
+                     <p>Hello, DalkStudy</p>
+                   )
+                 }
+               });
+               ```
+            - 컴포넌트를 랜더링을 하기 위해서는 ReactDOM.render() 호출에 첫번째 인자로 컴포넌트를 전달 <!-- .element: class="fragment" data-fragment-index="4" -->
+              ```
+              ReactDOM.render(
+                <Greeting/>,
+                document.getElementById('greeting-div')
+              );
+              ```
+            </script>
+        </section>
+        <section>
+            <script src="https://gist.github.com/jonnung/70d845d1e6c47df69e16a81408a41474.js"></script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+            ## JSX Trasformer
+             - JSX 를 javascript로 compile<!-- .element: class="fragment" data-fragment-index="1" -->
+             - 페이스북에서 react와 함께 제공했던 JSXTrasformer.js 는 Babel 로 흡수되어 browser.js 로 사용 가능<!-- .element: class="fragment" data-fragment-index="2" -->
+             - Production 환경에서는 Babel 을 이용해 Pre-Complie 하는 방식을 추천 <!-- .element: class="fragment" data-fragment-index="3" -->
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+            ## Babel
+            - Transpiler <!-- .element: class="fragment" data-fragment-index="1" -->
+            - 처리 대상은 es2015, JSX 그리고 Polyfill <!-- .element: class="fragment" data-fragment-index="2" -->
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+            ## Babel
+            ```
+            $ npm install --save-dev babel-cli
+            ```
+            ```
+            $ babel --presets babel-preset-react -f app.js -o bundle.js
+            ```
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+            ## Webpack
+            - Module budler<!-- .element: class="fragment" data-fragment-index="1" -->
+            - CommonJS, AMD(Asynchronouse Module Definition) 지원<!-- .element: class="fragment" data-fragment-index="2" -->
+              - javascript를 범용적으로 사용하기 위한 명세<!-- .element: class="fragment" data-fragment-index="3" -->
+              - javascript가 근본적으로 지원하지 않는 모듈 시스템을 사용하기 위해<!-- .element: class="fragment" data-fragment-index="4" -->
+            - 정의된(export) 모듈은 브라우저에서 바로 사용할 수 없기 때문에 complie을 통해 브라우저에서 사용하는 bundle을 만듬 <!-- .element: class="fragment" data-fragment-index="5" -->
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+            ## Webpack
+            ```
+            $ npm install -g webpack
+            ```
+            ```
+            $ webpack ./entry.js bundle.js
+            ```
+            </script>
+        </section>
+        <section>
+            <h4>Webpack</h4>
+            webpack.config.js
+            <script src="https://gist.github.com/jonnung/777d69747a17864fec72c28d9afda7b0.js"></script>
+        </section>
+        <section>
+            <h4>Webpack</h4>
+            webpack.config.test.js
+            <pre><code data-trim data-noescape>
+            $ cp webpack.config.js webpack.config.test.js
+$ webpack  --config webpack.config.test.js
+            </code></pre>
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+            ## Webpack
+            - Loders 
+              - 다양한 리소스를 자바스크립트에서 바로 사용할 수 있는 형태로 로딩하는 기능<!-- .element: class="fragment" data-fragment-index="1" -->
+              - babel을 webpack과 함께 사용하기 위해 babel-loader 를 설치하고, webpack.config.js 에 추가 <!-- .element: class="fragment" data-fragment-index="2" -->
+              - https://webpack.github.io/docs/list-of-loaders.html <!-- .element: class="fragment" data-fragment-index="3" -->
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+            ## Webpack
+            - 개발 서버<!-- .element: class="fragment" data-fragment-index="1" -->
+              - 설치<!-- .element: class="fragment" data-fragment-index="2" -->
+              ```
+              $ npm install -g webpack-dev-server
+              ```
+              - 자동 새로고침<!-- .element: class="fragment" data-fragment-index="3" -->
+                 - iframe 모드  <!-- .element: class="fragment" data-fragment-index="4" -->
+                 ___ http://localhost:8080/webpack-dev-server/index.html ___
+                 - inline 모드  <!-- .element: class="fragment" data-fragment-index="5" -->
+                 ___ http://localhost:8080/index.html ___
+                 ```
+                 $ webpack-dev-server —inline 
+                 ```
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+            ## Webpack
+            - Hot Module Replace (HMR)  <!-- .element: class="fragment" data-fragment-index="1" -->
+              - 코드를 수정, 추가하고 저장할 때 컴포넌트의 상태(state)를 잃지 않고, 페이지를 새로고침할 필요없이 코드를 수정시킴 <!-- .element: class="fragment" data-fragment-index="2" -->
+            ```
+            $ webpack-dev-server --hot --inline
+            ```
+            </script>
+        </section>
+        <section>
+        React도 모듈로 불러올 수 없을까?
+            <script src="https://gist.github.com/jonnung/5de895195ceb4a2773a0397b82696d6e.js"></script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+            ## JSX
+            - 태그를 사용할때 소문자는 일반 HTML 태그, 대문자로 시작하면 React(Custom) 컴포넌트 (via Convension) <!-- .element: class="fragment" data-fragment-index="1" -->
+            - JSX 태그의 이름은 displayName으로 지정할 수 있으나, 없을시 변수명을 displayName으로 간주 <!-- .element: class="fragment" data-fragment-index="2" -->
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+            ## JSX
+            - JSX를 javascript로 변환 해보기
+            
+            ```
+            // Before (JSX):
+            var msg = <MessageView message=“Hello” />;
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+            // After (JS):
+            var msg = React.createElement(MessageView, {message: “Hello”});
+            ```
+            http://babeljs.io/repl
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+            ## JSX
+            - class, for 같은 식별자 대신 className, htmlFor 로 사용 <!-- .element: class="fragment" data-fragment-index="1" -->
+            - 자바스크립트 표현식을 사용하려면 중괄호({ })를 감싸야함 <!-- .element: class="fragment" data-fragment-index="2" -->
+            ```
+            var greeting = 'Hello';
+            var message = <MessageView message={ greeting } />
+            ```
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+            ## Props
+            - 부모 컴포넌트 JSX 태그안에서 html의 Attribute 와 비슷한 방식으로 자식 컴포넌트의 전달
+              ```
+              var RandomMessage = React.createClass({
+                render: function () {
+                  return (
+                    <MessageView message="Hello" />
+                  );
+                }
+              );
+              ```
+            - 자식 컴포넌트에서 this.props 속성으로 접근
+              ```
+              var MessageView = React.createClass({
+              
+                render: function () {
+                  return (
+                    <p>{ this.props.message }</p>
+                  );
+                }
+              });
+              ```
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+            ## Props
+            - props 값이 업데이트 되면 React는 컴포넌트를 다시 랜더링 <!-- .element: class="fragment" data-fragment-index="1" -->
+            - props 는 Immutable (변경 불가) <!-- .element: class="fragment" data-fragment-index="2" -->
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+            ## State
+            - React의 컴포넌트들은 캡슐화되어 자신만의 상태를 갖음 (stat) <!-- .element: class="fragment" data-fragment-index="1" -->
+            - 컴포넌트의 상태는 this.state 속성으로 제어 <!-- .element: class="fragment" data-fragment-index="2" -->
+            - 부모의 state 값은 자식 컴포넌트의 props를 통해 전달할 수 있음 <!-- .element: class="fragment" data-fragment-index="3" -->
+              ```
+              <MessageView message={ this.state.message } />
+              ```
+            - 따라서 state가 변하면, props도 변한다. <!-- .element: class="fragment" data-fragment-index="4" -->
+            - 모든 React 컴포넌트들은 getInitialState 함수로 state를 초기화 <!-- .element: class="fragment" data-fragment-index="5" -->
+              ```
+              var RandomMessage = React.createClass({
+                getInitialState: function () {
+                  return { message: "Hello, React!" };
+                }
+              );
+              ```
+            </script>
+        </section>
+        <section>
+        <script src="https://gist.github.com/jonnung/6140ae8f8f3db9df014854f60dc33415.js"></script>
+        </section>
+        <section>
+            Happy Coding!
+        </section>
+      </div>
+    </div>
 
-		<script>
-			// More info https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				history: true,
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
 
-				// More info https://github.com/hakimel/reveal.js#dependencies
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        width: 1000,
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+      });
+    </script>
+  </body>
 </html>
