@@ -26,7 +26,7 @@
       <div class="slides">
         <section>
                 <h1>React & Webpack Starter</h1>
-                <h3>Dalk Study</h3>
+                <h4>2016.04.27 DalkStudy 2nd meet up</h4>
                 <p>
                   <small>Created by <a href="https://github.com/jonnung">EunwooCho</a></small>
                 </p>
@@ -100,6 +100,8 @@
             </script>
         </section>
         <section>
+            <h3>시작해보기</h3>
+            <a href="http://facebook.github.io/react/docs/getting-started.html">http://facebook.github.io/react/docs/getting-started.html</a>
             <script src="https://gist.github.com/jonnung/70d845d1e6c47df69e16a81408a41474.js"></script>
         </section>
         <section data-markdown>
@@ -125,6 +127,10 @@
             ```
             ```
             $ babel --presets babel-preset-react -f app.js -o bundle.js
+            ```
+            ```
+            # watch mode
+            $ babel --presets babel-preset-react -w app.js -o bundle.js
             ```
             </script>
         </section>
@@ -154,19 +160,10 @@
             webpack.config.js
             <script src="https://gist.github.com/jonnung/777d69747a17864fec72c28d9afda7b0.js"></script>
         </section>
-        <section>
-            <h4>Webpack</h4>
-            webpack.config.test.js
-            <pre><code data-trim data-noescape>
-            $ cp webpack.config.js webpack.config.test.js
-$ webpack  --config webpack.config.test.js
-            </code></pre>
-            </script>
-        </section>
         <section data-markdown>
             <script type="text/template">
             ## Webpack
-            - Loders 
+            - Loaders 
               - 다양한 리소스를 자바스크립트에서 바로 사용할 수 있는 형태로 로딩하는 기능<!-- .element: class="fragment" data-fragment-index="1" -->
               - babel을 webpack과 함께 사용하기 위해 babel-loader 를 설치하고, webpack.config.js 에 추가 <!-- .element: class="fragment" data-fragment-index="2" -->
               - https://webpack.github.io/docs/list-of-loaders.html <!-- .element: class="fragment" data-fragment-index="3" -->
@@ -182,11 +179,11 @@ $ webpack  --config webpack.config.test.js
               ```
               - 자동 새로고침<!-- .element: class="fragment" data-fragment-index="3" -->
                  - iframe 모드  <!-- .element: class="fragment" data-fragment-index="4" -->
-                 ___ http://localhost:8080/webpack-dev-server/index.html ___
+                 ___ http://localhost:8485/webpack-dev-server/index.html ___
                  - inline 모드  <!-- .element: class="fragment" data-fragment-index="5" -->
-                 ___ http://localhost:8080/index.html ___
+                 ___ http://localhost:8485/index.html ___
                  ```
-                 $ webpack-dev-server —inline 
+                 $ webpack-dev-server --inline 
                  ```
             </script>
         </section>
@@ -273,28 +270,38 @@ $ webpack  --config webpack.config.test.js
         <section data-markdown>
             <script type="text/template">
             ## State
-            - React의 컴포넌트들은 캡슐화되어 자신만의 상태를 갖음 (stat) <!-- .element: class="fragment" data-fragment-index="1" -->
+            - React의 컴포넌트들은 캡슐화되어 자신만의 상태를 갖음 (stateful) <!-- .element: class="fragment" data-fragment-index="1" -->
             - 컴포넌트의 상태는 this.state 속성으로 제어 <!-- .element: class="fragment" data-fragment-index="2" -->
-            - 부모의 state 값은 자식 컴포넌트의 props를 통해 전달할 수 있음 <!-- .element: class="fragment" data-fragment-index="3" -->
-              ```
-              <MessageView message={ this.state.message } />
-              ```
-            - 따라서 state가 변하면, props도 변한다. <!-- .element: class="fragment" data-fragment-index="4" -->
-            - 모든 React 컴포넌트들은 getInitialState 함수로 state를 초기화 <!-- .element: class="fragment" data-fragment-index="5" -->
-              ```
-              var RandomMessage = React.createClass({
-                getInitialState: function () {
-                  return { message: "Hello, React!" };
-                }
-              );
-              ```
+            - 모든 React 컴포넌트들은 getInitialState 함수로 state를 초기화 <!-- .element: class="fragment" data-fragment-index="3" -->
+            - 부모의 state 값은 자식 컴포넌트의 props를 통해 전달할 수 있음 <!-- .element: class="fragment" data-fragment-index="4" -->
+            ```
+            var RandomMessage = React.createClass({
+              getInitialState: function () {
+                return { message: "Hello, React!" };
+              },
+              render: function () {
+                return (
+                  <div>
+                    // 결국 부모 컴포넌트의 state가 변경되면, 자식 컴포넌트의 props도 변한다!
+                    <MessageView message={ this.state.message } />
+                    <p>
+                      <input type="button" onClick={ this.onClick } value="Change message" />
+                    </p>
+                  </div>
+                )
+              }
+            });
+            ```
             </script>
         </section>
         <section>
         <script src="https://gist.github.com/jonnung/6140ae8f8f3db9df014854f60dc33415.js"></script>
         </section>
-        <section>
-            Happy Coding!
+        <section data-markdown>
+          <script type="text/template">
+            Happy Coding!  
+            https://jsfiddle.net/jonnung/xg528r8s/
+            </script>
         </section>
       </div>
     </div>
