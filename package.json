@@ -2,14 +2,25 @@
   "name": "react-webpack-starter",
   "version": "1.0.0",
   "description": "Starter for React development with Webpack",
+  "scripts": {
+    "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --progress --hot --inline"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/dalkstudy/react-webpack-starter.git"
   },
-  "main": "index.js",
-  "scripts": {
-    "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --progress --hot --inline"
-  },
+  "keywords": [
+    "react",
+    "jsx",
+    "webpack",
+    "babel",
+    "es6",
+    "es2015"
+  ],
   "author": "Dalk Study",
-  "license": "MIT"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dalkstudy/react-webpack-starter/issues"
+  },
+  "homepage": "https://github.com/dalkstudy"
 }
